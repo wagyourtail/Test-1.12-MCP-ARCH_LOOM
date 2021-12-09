@@ -1,7 +1,7 @@
 # This is an example mods.toml file.
 # Any fields that aren't annotated with #optional are *required*!
 modLoader = "javafml"
-loaderVersion = "[36,)"
+loaderVersion = "[25,)"
 license = "All rights reserved" # Want to make your mod open source? Check out https://choosealicense.com/!
 
 # This is a URL to e.g. your GitHub or CurseForge issues page.
@@ -43,7 +43,7 @@ modId = "forge"
 mandatory = true # do you **need** this mod to be able to launch?
 # A version range using interval notation.
 # Brackets mean "inclusive" bounds, while parentheses mean "exclusive".
-versionRange = "[36,)" # This essentially means any forge >= 36
+versionRange = "[25,)" # This essentially means any forge >= 36
 ordering = "NONE" # Use this if you want your mod to be loaded specifically BEFORE or AFTER another mod
 side = "BOTH" # Specify where this mod is required: can be BOTH, CLIENT or SERVER
 
@@ -54,6 +54,6 @@ mandatory = true
 # See above for how to read this notation, this essentially means any
 # version of Minecraft from 1.17.1 (inclusive) until 1.18 (exclusive),
 # so versions 1.17.* would be valid.
-versionRange = "[1.17.1,1.18)"
+versionRange = "[1.13,1.14)"
 ordering = "NONE"
 side = "BOTH"

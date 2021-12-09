@@ -1,7 +1,7 @@
 package com.example.examplemod;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.world.item.Items;
+import net.minecraft.init.Items;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.world.ExplosionEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -45,7 +45,7 @@ public class ExampleMod {
     }
 
     private void clientSetup(final FMLClientSetupEvent event) {
-        LOGGER.info("Hey, we're on Minecraft version {}!", Minecraft.getInstance().getLaunchedVersion());
+        LOGGER.info("Hey, we're on Minecraft version {}!", Minecraft.getInstance().getVersion());
     }
 
     @SubscribeEvent
