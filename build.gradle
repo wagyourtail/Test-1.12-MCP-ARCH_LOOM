@@ -1,5 +1,5 @@
 plugins {
-    id 'dev.architectury.loom' version '0.10.0-SNAPSHOT'
+    id 'dev.architectury.loom' version '0.10.0.9999'
     id 'maven-publish'
 }
 
@@ -50,6 +50,12 @@ loom {
 
 repositories {
     maven {
+        url "https://maven.minecraftforge.net/maven/"
+        metadataSources {
+            artifact()
+        }
+    }
+    maven {
         url "https://files.minecraftforge.net/maven/"
         metadataSources {
             artifact()
@@ -58,11 +64,10 @@ repositories {
 }
 
 dependencies {
+    forge "net.minecraftforge:forge:${project.minecraft_version}-${project.forge_version}"
+
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
     mappings "de.oceanlabs.mcp:mcp_${project.mcp_channel}:${project.mcp_version}@zip"
-
-    // your forge dependency, this is **required** when using Forge Loom in forge mode!
-    forge "net.minecraftforge:forge:${project.minecraft_version}-${project.forge_version}"
 
     // additional dependencies can be specified using loom's regular format
     // specifying a "mod" dependency (like modImplementation or modApi)

@@ -4,12 +4,11 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.init.Items;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.world.ExplosionEvent;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.eventhandler.EventBus;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -21,7 +20,7 @@ public class ExampleMod {
     public ExampleMod() {
 
         // This is our mod's event bus, used for things like registry or lifecycle events
-        IEventBus MOD_BUS = FMLJavaModLoadingContext.get().getModEventBus();
+        EventBus MOD_BUS = FMLJavaModLoadingContext.get().getModEventBus();
 
         // This listener is fired on both client and server during setup.
         MOD_BUS.addListener(this::commonSetup);
@@ -39,13 +38,13 @@ public class ExampleMod {
         // feel free to check out the Forge wiki!
     }
 
-    private void commonSetup(final FMLCommonSetupEvent event) {
+    private void commonSetup(final FMLPreInitializationEvent event) {
         LOGGER.info("Hello from common setup! This is *after* registries are done, so we can do this:");
-        LOGGER.info("Look, I found a {}!", Items.DIAMOND.getRegistryName());
+        LOGGER.info("Look, I found a {}!", Items.DIAMOND.getUnlocalizedName());
     }
 
-    private void clientSetup(final FMLClientSetupEvent event) {
-        LOGGER.info("Hey, we're on Minecraft version {}!", Minecraft.getInstance().getVersion());
+    private void clientSetup(final FMLPostInitializationEvent event) {
+        LOGGER.info("Hey, we're on Minecraft version {}!", Minecraft.getMinecraft().getVersion());
     }
 
     @SubscribeEvent
