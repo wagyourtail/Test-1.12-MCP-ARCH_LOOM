@@ -1,0 +1,12 @@
+{
+    "required": true,
+    "package": "com.example.mixin",
+    "refmap": "example.refmap.json",
+    "compatibilityLevel": "JAVA_8",
+    "client": [
+        "Test"
+    ],
+    "injectors": {
+        "defaultRequire": 1
+    }
+}

@@ -23,7 +23,7 @@ public class ExampleMod {
     @Mod.EventHandler
     private void commonSetup(final FMLPreInitializationEvent event) {
         LOGGER.info("Hello from common setup! This is *after* registries are done, so we can do this:");
-        LOGGER.info(String.format("Look, I found a %s!", Items.DIAMOND.getUnlocalizedName()));
+        LOGGER.info(String.format("Look, I found a %s!", Items.diamond.getUnlocalizedName()));
     }
 
     @Mod.EventHandler
@@ -33,6 +33,6 @@ public class ExampleMod {
 
     @SubscribeEvent
     public void kaboom(ExplosionEvent.Detonate event) {
-        LOGGER.info(String.format("Kaboom! Something just blew up in %s!", event.getWorld()));
+        LOGGER.info(String.format("Kaboom! Something just blew up in %s!", event.world));
     }
 }

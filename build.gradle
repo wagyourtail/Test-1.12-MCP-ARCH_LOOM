@@ -1,6 +1,7 @@
 plugins {
     id 'dev.architectury.loom' version '0.10.0.9999'
     id 'maven-publish'
+    id 'com.github.johnrengelman.shadow' version '7.0.0'
 }
 
 // when using loom 0.10.0 with minecraft 1.16,
@@ -16,9 +17,6 @@ loom {
     setIntermediaryUrl('https://maven.legacyfabric.net/net/fabricmc/intermediary/%1$s/intermediary-%1$s-v2.jar')
     generateSrgTiny = true
     forge {
-        mixinConfigs = [
-                "examplemod.mixins.json"
-        ]
 
         // missing access transformers?
         // don't worry, you can still use them!
@@ -43,6 +41,9 @@ loom {
     // the data generator to check our resources directory for
     // existing files. (see Forge's ExistingFileHelper for more info)
     launches {
+        client {
+            property "fml.coreMods.load", "com.example.examplemod.MixinLoader"
+        }
         data {
             arg "--existing", file("src/main/resources").absolutePath
         }
@@ -62,6 +63,7 @@ repositories {
             artifact()
         }
     }
+    maven { url 'https://repo.spongepowered.org/maven' }
 //    maven {
 //        name = "legacy-fabric"
 //        url = "https://maven.legacyfabric.net"
@@ -75,6 +77,9 @@ dependencies {
 
     mappings "de.oceanlabs.mcp:mcp_${project.mcp_channel}:${project.mcp_version}@zip"
 
+    implementation 'org.spongepowered:mixin:0.7.11-SNAPSHOT'
+
+    shadow 'org.spongepowered:mixin:0.7.11-SNAPSHOT'
 //    mappings "net.fabricmc:yarn:1.8.9+build.202110221052:v2"
 
     // additional dependencies can be specified using loom's regular format
@@ -131,9 +136,24 @@ jar {
                 "Implementation-Title"    : project.name,
                 "Implementation-Version"  : version,
                 "Implementation-Vendor"   : project.mod_author,
-                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
+                'TweakClass': 'org.spongepowered.asm.launch.MixinTweaker',
+                "FMLCorePlugin": "com.example.examplemod.MixinLoader",
+                "FMLCorePluginContainsFMLMod": true,
+                "ForceLoadAsMod": true
         ])
     }
+}
+
+shadowJar {
+    configurations = [project.configurations.shadow]
+    classifier "dev-shadow"
+}
+
+remapJar {
+    input.set shadowJar.archiveFile
+    dependsOn shadowJar
+    classifier null
 }
 
 // configure the maven publication
