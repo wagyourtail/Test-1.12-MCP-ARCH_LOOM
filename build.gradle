@@ -72,8 +72,7 @@ dependencies {
     forge "net.minecraftforge:forge:${project.minecraft_version}-${project.forge_version}"
 
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
-
-    mappings "de.oceanlabs.mcp:mcp_${project.mcp_channel}:${project.mcp_version}@zip"
+//    mappings "de.oceanlabs.mcp:mcp_${project.mcp_channel}:${project.mcp_version}@zip"
 
 //    mappings "net.fabricmc:yarn:1.8.9+build.202110221052:v2"
 
